@@ -1,0 +1,24 @@
+<mat-sidenav-container fullscreen>
+
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav mode="over" [ngStyle]="{ width: '250px' }" >
+    <mat-toolbar>
+      <span>TaskFlow</span>
+      <span class="spacer"></span>
+
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>close</mat-icon>
+
+      </button>
+    </mat-toolbar>
+
+  </mat-sidenav>
+
+  <!-- Header -->
+  <app-header [sidenav]="sidenav"></app-header>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-sidenav-container>
