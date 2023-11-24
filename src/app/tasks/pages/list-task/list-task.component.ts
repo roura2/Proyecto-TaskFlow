@@ -1,9 +1,24 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { TasksService } from '../../services/tasks.service';
 
-import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, } from '@angular/cdk/drag-drop';
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
-import { Board } from '../../interfaces/Board.interface';
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+];
 
 @Component({
   selector: 'app-list-task',
@@ -11,38 +26,6 @@ import { Board } from '../../interfaces/Board.interface';
   styleUrls: ['./list-task.component.css']
 })
 export class ListTaskComponent {
-  // Creo les llistes que es mostraran en el Kanban
-  boards!: Board[]; //TODO: Implementar, que les columnes agafarles aqui, i no passarles directament al html
-
-  constructor(
-    public tasksService: TasksService
-    ) {
-      // this.tasksService.getBoards().subscribe(boards => {
-    //   this.boards = boards;
-    // });
-  }
-
-  /**
-   * Aquesta funcio controla event de 'drop', quan es realitzi una accio de agafar i deixar un element en una llista
-   * propia de 'Angular Material'.
-   * @param event El event que estem revent, inclueix tota la informacio per poder gestionar el 'Drag & Drop'
-  */
- drop(event: CdkDragDrop<string[]>) {
-   if (event.previousContainer === event.container) {
-     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
-
-  onDeleteTask(cardId: number, columnId: any) {
-    this.tasksService.deleteTask(cardId, columnId);
-  }
-
-  // Llista de les llistes, d'aquesta manera sera mes facil iterarlas al HTML
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = ELEMENT_DATA;
 }
