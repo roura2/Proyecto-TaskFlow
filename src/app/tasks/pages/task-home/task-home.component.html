@@ -6,11 +6,18 @@
       <span>TaskFlow</span>
       <span class="spacer"></span>
 
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button mat-icon-button  (click)="sidenav.toggle()">
         <mat-icon>close</mat-icon>
+
+
 
       </button>
     </mat-toolbar>
+
+    <button class="w-100 mt-3" mat-raised-button	color="warn" [routerLink]="['/tasks/list-tasks']" >TASKAS</button>
+
+    <button class="w-100 mt-3" mat-raised-button	color="warn" [routerLink]="['/tasks/usuaris']" >TASKAS</button>
+
 
   </mat-sidenav>
 
