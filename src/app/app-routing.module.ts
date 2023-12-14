@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ErrorPageComponent } from './shared/pages/error-page/error-page.component';
+
 const routes: Routes = [
   {
     path: 'tasks',
@@ -11,9 +13,13 @@ const routes: Routes = [
     loadChildren: () => import('./users/users.module').then( m => m.UsersModule )
   },
   // {
-  //   path: '**',
-  //   redirectTo: 'tasks'
-  // }
+  //   path: '404',
+  //   component: ErrorPageComponent
+  // },
+  {
+    path: '**',
+    redirectTo: 'tasks'
+  }
 ];
 
 @NgModule({

@@ -1,6 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 
-import { MatSidenav } from '@angular/material/sidenav';
+import { TasksService } from '../../services/tasks.service';
+import { SharedService } from '../../../shared/services/shared.service';
+import { SidenavComponent } from '../../../shared/components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-task-home',
@@ -9,5 +11,23 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class TaskHomeComponent {
 
+  // @ViewChild('sidenav') elementSidenav: any; // TODO: Posar un tipat de dades el sidenav
 
+  constructor(
+    // public tasksService: TasksService
+    private sharedService: SharedService
+  ) {
+    // console.log("Sidenav: ",this.elementSidenav);
+  }
+
+  // addColumn(title: string) {
+  //   if (title) {
+  //     this.tasksService.addColumn(title);
+  //   }
+  // }
+
+  // ngAfterViewInit(): void {
+  //   const sidenav = this.elementSidenav;
+  //   this.sharedService.setSidenav(sidenav);
+  // }
 }

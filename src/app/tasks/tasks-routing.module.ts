@@ -1,10 +1,10 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 
-import { TaskHomeComponent } from './pages/task-home/task-home.component';
-import { ListTaskComponent } from './pages/list-task/list-task.component';
 import { AddTaskComponent } from './pages/add-task/add-task.component';
+import { ListTaskComponent } from './pages/list-task/list-task.component';
 import { SearchTaskComponent } from './pages/search-task/search-task.component';
+import { TaskHomeComponent } from './pages/task-home/task-home.component';
 import { TaskComponent } from './pages/task/task.component';
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
     component: TaskHomeComponent,
     children: [
       {
-        path: 'list-tasks',
+        path: 'list-task',
         component: ListTaskComponent
       },
       {
@@ -34,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'list-tasks'
+        redirectTo: 'list-task'
       },
     ]
   }
@@ -48,6 +48,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class TasksRoutingModule {
-
-}
+export class TasksRoutingModule { }

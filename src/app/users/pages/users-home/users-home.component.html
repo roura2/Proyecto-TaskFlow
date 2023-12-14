@@ -1,5 +1,6 @@
-<!-- <mat-sidenav-container fullscreen>
+<mat-sidenav-container fullscreen>
 
+  <!-- Sidenav -->
   <mat-sidenav #sidenav mode="over" [ngStyle]="{ width: '250px' }" >
     <mat-toolbar>
       <span>TaskFlow</span>
@@ -15,14 +16,14 @@
       <a routerLink="/tasks"
          mat-list-item
          (click)="sidenav.toggle()">
-          <mat-icon mat-list-icon>label</mat-icon>
+          <!-- <mat-icon mat-list-icon>label</mat-icon> -->
           <span>Tasks</span>
       </a>
 
       <a routerLink="/users"
          mat-list-item
          (click)="sidenav.toggle()">
-          <mat-icon mat-list-icon>add</mat-icon>
+          <!-- <mat-icon mat-list-icon>add</mat-icon> -->
           <span>Users</span>
       </a>
     </mat-nav-list>
@@ -37,28 +38,16 @@
 
     <span class="spacer"></span>
 
-    <app-dialog (emitText)="addColumn($event)" question="Add new column">
+    <!-- <app-dialog (emitText)="addColumn($event)" question="Add new column">
       <button mat-raised-button color="primary">
         New Column
       </button>
-    </app-dialog>
+    </app-dialog> -->
 
   </mat-toolbar>
 
   <div>
     <router-outlet></router-outlet>
   </div>
-
-</mat-sidenav-container> -->
-
-<mat-sidenav-container fullscreen>
-
-<!-- <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px' }" > -->
-  <!-- <app-sidenav [sidenav]="sidenav"></app-sidenav> -->
-  <app-sidenav></app-sidenav>
-<!-- </mat-sidenav> -->
-
-<!-- <app-header [sidenav]="sidenav"></app-header> -->
-<app-header></app-header>
 
 </mat-sidenav-container>

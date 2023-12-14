@@ -3,7 +3,8 @@ import { TasksService } from '../../services/tasks.service';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, } from '@angular/cdk/drag-drop';
 
-import { Board } from '../../interfaces/Board.interface';
+import { Column } from '../../interfaces/Column.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-task',
@@ -12,14 +13,20 @@ import { Board } from '../../interfaces/Board.interface';
 })
 export class ListTaskComponent {
   // Creo les llistes que es mostraran en el Kanban
-  boards!: Board[]; //TODO: Implementar, que les columnes agafarles aqui, i no passarles directament al html
+  boards: Column[] = []; //TODO: Implementar, que les columnes agafarles aqui, i no passarles directament al html
+
 
   constructor(
     public tasksService: TasksService
-    ) {
-      // this.tasksService.getBoards().subscribe(boards => {
-    //   this.boards = boards;
-    // });
+    ) { }
+
+    ngOnInit() {
+      console.log("Holaa comoponent Inicat ");
+    this.tasksService.getBoards().subscribe(boards => {
+      console.log({boards});
+
+      // this.boards = boards;
+    })
   }
 
   /**
@@ -40,9 +47,18 @@ export class ListTaskComponent {
     }
   }
 
+  onDeleteColumn(columnId: number) {
+    this.tasksService.deleteColumn(columnId);
+  }
+
   onDeleteTask(cardId: number, columnId: any) {
     this.tasksService.deleteTask(cardId, columnId);
   }
 
-  // Llista de les llistes, d'aquesta manera sera mes facil iterarlas al HTML
+  onAddTask(text: string, columnId: number) { //TODO: Implemenar descripcio
+    if(text) {
+      this.tasksService.addCard(text, columnId)
+    }
+  }
+
 }

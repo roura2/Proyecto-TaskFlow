@@ -1,0 +1,22 @@
+<mat-sidenav #sidenav mode="side" [ngStyle]="{ width: '250px' }" disableClose>
+  <mat-toolbar>
+    <span>TaskFlow</span>
+    <span class="spacer"></span>
+
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-nav-list>
+    <a routerLink="/tasks" mat-list-item (click)="toggleSidenav(); goToTasks()">
+      <mat-icon mat-list-icon>label</mat-icon>
+      <span>Tasks</span>
+    </a>
+
+    <a routerLink="/users" mat-list-item (click)="toggleSidenav(); goToUsers()">
+      <mat-icon mat-list-icon>add</mat-icon>
+      <span>Users</span>
+    </a>
+  </mat-nav-list>
+</mat-sidenav>
