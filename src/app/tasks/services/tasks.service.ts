@@ -1,38 +1,36 @@
-import { Injectable, NgIterable } from '@angular/core';
-
+import { Injectable } from '@angular/core';
 import { Column, Task } from '../interfaces/Column.interface';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
-
-  private baseUrl: string = environment.baseUrl;
+  private localStorageKey = 'myTasksData';
   private initBoard: Column[] = [];
-
-  // Creem un observable per gestionar les llistes, nomes es cragaran en cas de que hi hagi algun
-  // canvi en elles, per defecte angular renderitza tots el components cada 10ms
-  // lo que fa que sogui molt inaficient, d'aquesta manera, nomes es renderitzara el component si
-  // ha hagut algun canvi en algunes de les tasques
-  // ? private boardsSubject: BehaviorSubject<Board[]> = new BehaviorSubject<Board[]>([]);
-  // ? public readonly boards$: Observable<Board[]> = this.boardsSubject.asObservable();
-
   private board: any[] = this.initBoard;
   private board$ = new BehaviorSubject<any[]>(this.initBoard);
 
-  constructor(private http: HttpClient) { }
+  constructor() {
+    const storedData = localStorage.getItem(this.localStorageKey);
+    if (storedData) {
+      this.board = JSON.parse(storedData);
+      this.board$.next([...this.board]);
+    }
+  }
+
+  private saveToLocalStorage() {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.board));
+  }
 
   getBoards() {
-    // ? return this.boardsSubject.next(this.initBoard)
     return this.board$.asObservable();
   }
 
   deleteColumn(columnId: number) {
     this.board = this.board.filter((column: Column) => column.id !== columnId);
     this.board$.next([...this.board]);
+    this.saveToLocalStorage();
   }
 
   deleteTask(taskId: number, columnId: number) {
@@ -44,9 +42,10 @@ export class TasksService {
     });
 
     this.board$.next([...this.board]);
+    this.saveToLocalStorage();
   }
 
-  addCard(text: string, columnId: number) { // TODO: Implementar descripcio en la taska i usuaris
+  addCard(text: string, columnId: number) {
     const newTask: Task = {
       id: Date.now(),
       text,
@@ -54,9 +53,9 @@ export class TasksService {
       manager: {
         id: 1,
         name: 'Joan',
-        lastname: "Roura",
-        email: "jrouralema@gmail.com",
-        address: "Carrer Roca Guillera",
+        lastname: 'Roura',
+        email: 'jrouralema@gmail.com',
+        address: 'Carrer Roca Guillera',
         tel: 601982898
       }
     };
@@ -69,12 +68,10 @@ export class TasksService {
     });
 
     this.board$.next([...this.board]);
-
-
+    this.saveToLocalStorage();
   }
 
-  addColumn(title: string) { // TODO: Implementar un colorPicker
-
+  addColumn(title: string) {
     const newColumn: Column = {
       id: Date.now(),
       title,
@@ -82,10 +79,47 @@ export class TasksService {
       tasks: []
     };
 
-    console.log({newColumn});
-
     this.board = [...this.board, newColumn];
     this.board$.next([...this.board]);
-    console.log(this.board, this.board$);
+    this.saveToLocalStorage();
+  }
+
+  // Método para buscar una columna por su ID
+  getColumnById(columnId: number): Column | undefined {
+    return this.board.find((column: Column) => column.id === columnId);
+  }
+
+  // Método para editar el título de una columna por su ID
+  editColumnTitle(columnId: number, newTitle: string) {
+    const columnToEdit = this.getColumnById(columnId);
+    if (columnToEdit) {
+      columnToEdit.title = newTitle;
+      this.saveToLocalStorage();
+      this.board$.next([...this.board]);
+    }
+  }
+
+  // Método para buscar una tarea por su ID
+  getTaskById(taskId: number): Task | undefined {
+    for (const column of this.board) {
+      const task = column.tasks.find((t: Task) => t.id === taskId);
+      if (task) {
+        return task;
+      }
+    }
+    return undefined;
+  }
+
+  // Método para editar el texto de una tarea por su ID
+  editTaskText(taskId: number, newText: string) {
+    for (const column of this.board) {
+      const task = column.tasks.find((t: Task) => t.id === taskId);
+      if (task) {
+        task.text = newText;
+        this.saveToLocalStorage();
+        this.board$.next([...this.board]);
+        return;
+      }
+    }
   }
 }

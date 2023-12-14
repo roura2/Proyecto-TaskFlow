@@ -18,12 +18,12 @@ export class ListTaskComponent {
 
   constructor(
     public tasksService: TasksService
-    ) { }
+  ) { }
 
-    ngOnInit() {
-      console.log("Holaa comoponent Inicat ");
+  ngOnInit() {
+    console.log("Holaa comoponent Inicat ");
     this.tasksService.getBoards().subscribe(boards => {
-      console.log({boards});
+      console.log({ boards });
 
       // this.boards = boards;
     })
@@ -34,9 +34,9 @@ export class ListTaskComponent {
    * propia de 'Angular Material'.
    * @param event El event que estem revent, inclueix tota la informacio per poder gestionar el 'Drag & Drop'
   */
- drop(event: CdkDragDrop<string[]>) {
-   if (event.previousContainer === event.container) {
-     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -56,7 +56,7 @@ export class ListTaskComponent {
   }
 
   onAddTask(text: string, columnId: number) { //TODO: Implemenar descripcio
-    if(text) {
+    if (text) {
       this.tasksService.addCard(text, columnId)
     }
   }

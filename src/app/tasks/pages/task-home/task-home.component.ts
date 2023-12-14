@@ -11,20 +11,19 @@ import { SidenavComponent } from '../../../shared/components/sidenav/sidenav.com
 })
 export class TaskHomeComponent {
 
-  // @ViewChild('sidenav') elementSidenav: any; // TODO: Posar un tipat de dades el sidenav
+  @ViewChild('sidenav') elementSidenav: any; // TODO: Posar un tipat de dades el sidenav
 
   constructor(
-    // public tasksService: TasksService
-    private sharedService: SharedService
+    public tasksService: TasksService,
+    // private sharedService: SharedService
   ) {
-    // console.log("Sidenav: ",this.elementSidenav);
   }
 
-  // addColumn(title: string) {
-  //   if (title) {
-  //     this.tasksService.addColumn(title);
-  //   }
-  // }
+  addColumn(title: string) {
+    if (title) {
+      this.tasksService.addColumn(title);
+    }
+  }
 
   // ngAfterViewInit(): void {
   //   const sidenav = this.elementSidenav;
