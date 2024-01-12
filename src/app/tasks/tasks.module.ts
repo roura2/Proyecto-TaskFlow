@@ -1,39 +1,39 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TasksRoutingModule } from './tasks-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 
-import { TaskHomeComponent } from './pages/task-home/task-home.component';
-import { AddTaskComponent } from './pages/add-task/add-task.component';
-import { SearchTaskComponent } from './pages/search-task/search-task.component';
-import { TaskComponent } from './pages/task/task.component';
-import { ListTaskComponent } from './pages/list-task/list-task.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { DialogBodyComponent } from './components/dialog-body/dialog-body.component';
+import { PrimeNgModule } from '../prime-ng/prime-ng.module';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
+import { UsersPageComponent } from './pages/users-page/users-page.component';
 
 
 
 @NgModule({
   declarations: [
-    TaskHomeComponent,
-    AddTaskComponent,
-    SearchTaskComponent,
-    TaskComponent,
-    ListTaskComponent,
     TaskCardComponent,
     ConfirmDialogComponent,
     DialogComponent,
-    DialogBodyComponent
+    DialogBodyComponent,
+    HomePageComponent,
+    TasksPageComponent,
+    UsersPageComponent,
   ],
   imports: [
     CommonModule,
     TasksRoutingModule,
     SharedModule,
     MaterialModule,
+    PrimeNgModule,
+    ReactiveFormsModule
   ]
 })
 export class TasksModule { }

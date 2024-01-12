@@ -1,11 +1,22 @@
-<div class="d-flex justify-content-between align-items-start mb-2">
-  <div class="mt-1"> {{ task.text }} </div>
+<div class="d-flex justify-content-between   align-items-start mb-2">
+  <h5 class="mt-1"> {{ task.text }} </h5>
 
-  <button mat-icon-button class="icon-delete" (click)="onTaskDelete(task.id)">
-    <mat-icon class="icon">delete</mat-icon>
-  </button>
+  <div>
+    <!-- Implementacion de editar la tarea -->
+    <!-- Dentro del div con los botones -->
+    <app-dialog (emitText)="onTaskEdit(task.id, $event )" [question]="'Edit task ' + task.text">
+      <button mat-raised-button class=""> <!-- TODO: Modifica boto -->
+        <mat-icon class="icon">edit</mat-icon>
+      </button>
+    </app-dialog>
+
+    <button mat-icon-button class="icon-delete" (click)="onTaskDelete(task.id)">
+      <mat-icon class="icon">delete</mat-icon>
+    </button>
+  </div>
 </div>
 
-<div class="d-flex justify-content-end align-items-center mb-2"> <!-- TODO: Canviar el disseny de com es mostrar el responsable -->
-  <span> {{ task.manager.name }} </span>
+<div class="d-flex justify-content-end align-items-center mb-2">
+  <!-- TODO: Canviar el disseny de com es mostrar el responsable -->
+  <span class="fw-medium"> {{ task.manager.name }} </span>
 </div>

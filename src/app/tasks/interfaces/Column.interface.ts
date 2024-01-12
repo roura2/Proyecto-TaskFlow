@@ -1,4 +1,4 @@
-import { User } from "src/app/users/interfaces/User.interface";
+import { User } from "src/app/tasks/interfaces/User.interface";
 
 export interface Column {
   id:    number;

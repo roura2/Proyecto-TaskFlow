@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
+import { CdkTableModule } from '@angular/cdk/table';
 
 
 
@@ -36,7 +37,8 @@ import { FormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatDialogModule,
     DragDropModule,
-    FormsModule
+    FormsModule,
+    CdkTableModule
   ]
 })
 export class MaterialModule { }

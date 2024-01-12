@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Column, Task } from '../interfaces/Column.interface';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from 'src/app/tasks/interfaces/User.interface';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +15,11 @@ export class TasksService {
   private board: any[] = this.initBoard;
   private board$ = new BehaviorSubject<any[]>(this.initBoard);
 
-  constructor() {
+  private _baseUrl: string = environment.baseUrl;
+
+  constructor(
+    private http: HttpClient
+  ) {
     const storedData = localStorage.getItem(this.localStorageKey);
     if (storedData) {
       this.board = JSON.parse(storedData);
@@ -51,7 +59,7 @@ export class TasksService {
       text,
       desc: 'Aixo es una descripcio',
       manager: {
-        id: 1,
+        id: "1",
         name: 'Joan',
         lastname: 'Roura',
         email: 'jrouralema@gmail.com',
@@ -122,4 +130,5 @@ export class TasksService {
       }
     }
   }
+
 }

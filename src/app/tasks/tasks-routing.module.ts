@@ -1,48 +1,59 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 
-import { AddTaskComponent } from './pages/add-task/add-task.component';
-import { ListTaskComponent } from './pages/list-task/list-task.component';
-import { SearchTaskComponent } from './pages/search-task/search-task.component';
-import { TaskHomeComponent } from './pages/task-home/task-home.component';
-import { TaskComponent } from './pages/task/task.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
+import { UsersPageComponent } from './pages/users-page/users-page.component';
 
-const routes: Routes = [
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: TaskHomeComponent,
+//     children: [
+//       {
+//         path: 'list-task',
+//         component: ListTaskComponent
+//       },
+//       {
+//         path: 'search-task',
+//         component: SearchTaskComponent
+//       },
+//       {
+//         path: ':id',
+//         component: TaskComponent
+//       },
+//       {
+//         path: '**',
+//         redirectTo: 'list-task'
+//       },
+//     ]
+//   }
+// ]
+
+const routes2: Routes = [
   {
     path: '',
-    component: TaskHomeComponent,
+    component: HomePageComponent,
     children: [
       {
-        path: 'list-task',
-        component: ListTaskComponent
+        path: 'tasks',
+        component: TasksPageComponent
       },
       {
-        path: 'add-task',
-        component: AddTaskComponent
-      },
-      {
-        path: 'edit-task/:id',
-        component: AddTaskComponent
-      },
-      {
-        path: 'search-task',
-        component: SearchTaskComponent
-      },
-      {
-        path: ':id',
-        component: TaskComponent
+        path: 'users',
+        component: UsersPageComponent
       },
       {
         path: '**',
-        redirectTo: 'list-task'
+        redirectTo: 'tasks'
       },
     ]
   }
-]
+];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes2)
   ],
   exports: [
     RouterModule

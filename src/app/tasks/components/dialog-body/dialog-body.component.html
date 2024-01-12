@@ -2,10 +2,10 @@
   <label class="mb-2">{{data.question}}</label>
 
   <mat-form-field class="w-100">
-    <mat-label>Add Name</mat-label>
+    <mat-label>Add Text</mat-label>
     <input matInput [(ngModel)]="data.text">
   </mat-form-field>
-  
+
   <div mat-dialog-actions>
     <button mat-raised-button [matDialogClose]="data.text" color="primary">Confirm</button>
     <button mat-button (click)="closeDialog()">Cancel</button>

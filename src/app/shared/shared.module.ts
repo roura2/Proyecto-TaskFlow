@@ -8,6 +8,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { DialogComponent } from '../tasks/components/dialog/dialog.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DialogComponent } from '../tasks/components/dialog/dialog.component';
     HeaderComponent,
     ErrorPageComponent,
     FooterComponent,
-    SidenavComponent
+    SidenavComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { DialogComponent } from '../tasks/components/dialog/dialog.component';
     HeaderComponent,
     FooterComponent,
     SidenavComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }
