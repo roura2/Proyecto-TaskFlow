@@ -1,10 +1,23 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
 
-import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from '@angular/cdk/drag-drop';
+
+import { ColumnsService } from '../../services/columns.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 import { Column } from '../../interfaces/Column.interface';
-import { Subscription } from 'rxjs';
+import { Task } from '../../interfaces/Task.interface';
+
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { AddColumnDialogComponent } from '../../components/add-column-dialog/add-column-dialog.component';
+import { AddTaskDialogComponent } from '../../components/add-task-dialog/add-task-dialog.component';
 
 @Component({
   selector: 'app-tasks-page',
@@ -14,27 +27,27 @@ import { Subscription } from 'rxjs';
 export class TasksPageComponent {
 
   // Creo les llistes que es mostraran en el Kanban
-  boards: Column[] = []; //TODO: Implementar, que les columnes agafarles aqui, i no passarles directament al html
+  columns: Column[] = []; //TODO: Implementar, que les columnes agafarles aqui, i no passarles directament al html
 
+  currentUser: any;
 
   constructor(
-    public tasksService: TasksService
+    private authService: AuthService,
+    public tasksService: TasksService,
+    private columnServie: ColumnsService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
-    this.tasksService.getBoards().subscribe(boards => {
-      console.log({ boards });
+    this.tasksService.getColumns().subscribe(boards => {
+      // console.log(boards);
 
       // this.boards = boards;
     })
   }
 
-  /**
-   * Aquesta funcio controla event de 'drop', quan es realitzi una accio de agafar i deixar un element en una llista
-   * propia de 'Angular Material'.
-   * @param event El event que estem revent, inclueix tota la informacio per poder gestionar el 'Drag & Drop'
-  */
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -47,25 +60,53 @@ export class TasksPageComponent {
     }
   }
 
+  onAddColumn() {
+    const addColumnDialog = this.dialog.open(AddColumnDialogComponent, {
+      width: '400px',
+    });
+
+    addColumnDialog.afterClosed().subscribe(column => {
+      if (column) {
+        this.tasksService.addColumn(column);
+      }
+    });
+  }
+
   onDeleteColumn(columnId: number) {
     this.tasksService.deleteColumn(columnId);
   }
 
-  onDeleteTask(cardId: number, columnId: any) {
-    this.tasksService.deleteTask(cardId, columnId);
+  onDeleteTask(taskId: number, columnId: any) {
+    this.tasksService.deleteTask(taskId, columnId);
   }
 
-  onAddTask(text: string, columnId: number) { //TODO: Implemenar descripcio
-    if (text) {
-      this.tasksService.addCard(text, columnId)
-    }
+  onAddTask(columnId: number, column: Column) { //TODO: Implemenar descripcio
+    const addTaskDialog = this.dialog.open(AddTaskDialogComponent, {
+      width: '400px',
+      // data: column
+    });
+
+    addTaskDialog.afterClosed().subscribe(task => {
+      if (task) {
+        this.tasksService.addTaskToColumn(columnId, task)
+      }
+    });
   }
 
   onEditColumnTitle(columnId: number, newTitle: string) {
     this.tasksService.editColumnTitle(columnId, newTitle);
   }
 
-  onEditTaskText(taskId: number, newText: string) {
-    this.tasksService.editTaskText(taskId, newText);
+  onEditTaskText(taskId: number, task: Task) {
+    console.log(taskId);
+    console.log(task);
+
+    this.tasksService.editTask(taskId, task);
+  }
+
+  showSnackBar(mensaje: string) {
+    this.snackBar.open(mensaje, 'Ok!', {
+      duration: 2500
+    });
   }
 }

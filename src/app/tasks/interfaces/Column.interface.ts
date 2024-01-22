@@ -1,17 +1,18 @@
-import { User } from "src/app/tasks/interfaces/User.interface";
+import { Task } from "./Task.interface";
+
+export interface ColumnDB {
+  id?: string;
+  color?: string;
+  title?: string;
+}
 
 export interface Column {
-  id:    number;
-  title: string;
-  color: string;
-  tasks:  Task[];
+  id?: number;
+  title?: string;
+  color?: string;
+  tasks?: Task[];
 }
 
-export interface Task {
-  id:   number;
-  text: string;
-  desc: string; // TODO: implementar descripcio quan es crei una taska
-  manager: User;
-}
+
 
 

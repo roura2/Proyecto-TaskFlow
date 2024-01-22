@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { TasksRoutingModule } from './tasks-routing.module';
 import { MaterialModule } from '../material/material.module';
@@ -14,6 +15,8 @@ import { PrimeNgModule } from '../prime-ng/prime-ng.module';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { AddColumnDialogComponent } from './components/add-column-dialog/add-column-dialog.component';
+import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-dialog.component';
 
 
 
@@ -26,6 +29,8 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     HomePageComponent,
     TasksPageComponent,
     UsersPageComponent,
+    AddColumnDialogComponent,
+    AddTaskDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +38,8 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     SharedModule,
     MaterialModule,
     PrimeNgModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class TasksModule { }

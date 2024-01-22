@@ -1,5 +1,8 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Task } from '../../interfaces/Column.interface';
+import { Task } from '../../interfaces/Task.interface';
+import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-task-card',
@@ -9,17 +12,28 @@ import { Task } from '../../interfaces/Column.interface';
 export class TaskCardComponent {
 
   @Input() task!: Task;
-  // @Output() emitEditTaskText: EventEmitter<> = new EventEmitter();
   @Output() emitDeleteTask: EventEmitter<number> = new EventEmitter();
-  @Output() emitEditTaskText: EventEmitter<{ taskId: number, newText: string }> = new EventEmitter();
+  @Output() emitEditTask: EventEmitter<{idTask: number, task: Task}> = new EventEmitter();
+
+  constructor(
+    private dialog: MatDialog,
+    private tasksService: TasksService
+  ) { }
 
   onTaskDelete(id: number) {
     this.emitDeleteTask.emit(id);
   }
 
-  onTaskEdit(id: number, newText: string) {
-    if (newText) {
-      this.emitEditTaskText.emit({ taskId: id, newText: newText });
-    }
+  onTaskEdit(taskId: number, task: Task) {
+    const editTaskDialog = this.dialog.open(AddTaskDialogComponent, {
+      width: '400px',
+      data: task
+    });
+
+    editTaskDialog.afterClosed().subscribe(task => {
+      if (task) {
+        this.emitEditTask.emit({ idTask: task.id, task });
+      }
+    });
   }
 }

@@ -1,8 +1,7 @@
 <div class="container-fluid mt-3">
   <div cdkDropListGroup class="row">
-    <div class="col-sm-6 col-lg-3 mb-3" *ngFor="let column of (tasksService.getBoards() | async)">
+    <div class="col-sm-6 col-lg-3 mb-3" *ngFor="let column of (tasksService.getColumns() | async)">
 
-      <!-- Titol de la Columna -->
       <div class="d-flex justify-content-between align-items-center p-2 shadow-sm column-header">
         <h2 class="m-0">{{ column.title }}</h2>
 
@@ -11,21 +10,41 @@
         </button>
       </div>
 
-      <!-- Afegir Nova Tasca -->
-      <app-dialog (emitText)="onAddTask($event, column.id)" [question]="'Add new task in ' + column.title + ' column'">
-        <button mat-raised-button class="w-100 mb-1 btn-add">+</button>
-      </app-dialog>
+      <button mat-raised-button (click)="onAddTask(column.id!, column)" class="w-100 mb-1 btn-add">
+        <mat-icon>add</mat-icon>
+      </button>
 
-      <div cdkDropList [cdkDropListData]="column.tasks" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div cdkDrag class="example-box" [ngStyle]="{ 'background': column.color }" *ngFor="let task of column.tasks">
+      <div cdkDropList
+           [cdkDropListData]="column.tasks"
+           class="example-list"
+           (cdkDropListDropped)="drop($event)">
 
-          <!-- Dentro del bucle *ngFor -->
-          <app-task-card [task]="task" (emitEditTaskText)="onEditTaskText($event.taskId, $event.newText)"
-            (emitDeleteTask)="onDeleteTask($event, column.id)"></app-task-card>
+        <div cdkDrag
+             class="example-box"
+             [ngStyle]="{ 'background': column.color }"
+             *ngFor="let task of column.tasks">
+
+          <app-task-card
+            [task]="task"
+            (emitEditTask)="onEditTaskText($event.idTask, $event.task)"
+            (emitDeleteTask)="onDeleteTask($event, column.id)">
+          </app-task-card>
 
         </div>
       </div>
-
     </div>
-  </div>
 
+  </div>
+</div>
+
+<div class="fab-add-column">
+  <button mat-fab color="primary" (click)="onAddColumn()">
+    <mat-icon>my_library_add</mat-icon>
+  </button>
+</div>
+
+<!-- <div class="fab-add-user">
+  <button mat-fab color="primary" (click)="onAddColumn()">
+    <mat-icon>person_add</mat-icon>
+  </button>
+</div> -->

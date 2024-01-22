@@ -5,32 +5,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 import { UsersPageComponent } from './pages/users-page/users-page.component';
 
-// const routes: Routes = [
-//   {
-//     path: '',
-//     component: TaskHomeComponent,
-//     children: [
-//       {
-//         path: 'list-task',
-//         component: ListTaskComponent
-//       },
-//       {
-//         path: 'search-task',
-//         component: SearchTaskComponent
-//       },
-//       {
-//         path: ':id',
-//         component: TaskComponent
-//       },
-//       {
-//         path: '**',
-//         redirectTo: 'list-task'
-//       },
-//     ]
-//   }
-// ]
-
-const routes2: Routes = [
+const routes: Routes = [
   {
     path: '',
     component: HomePageComponent,
@@ -53,7 +28,7 @@ const routes2: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes2)
+    RouterModule.forChild(routes)
   ],
   exports: [
     RouterModule

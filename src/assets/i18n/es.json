@@ -1,0 +1,26 @@
+{
+
+    "addNewColumn": "Agregar nueva columna",
+    "addName": "Agregar nombre",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "newState": "Nuevo estado",
+    "tasks": "Tareas",
+    "users": "Usuarios",
+    "new": "Nuevo",
+    "listOfUsers": "Lista de usuarios",
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "address": "Dirección",
+    "tel": "Tel.",
+    "search": "Buscar",
+    "totalUsers": "En total hay usuarios",
+    "signIn": "Iniciar sesión",
+    "password": "Contraseña",
+    "login": "Inicio de sesión",
+    "noAccount": "¿No tienes cuenta?",
+    "register": "Registrarse",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "passwordRequired": "La contraseña es obligatoria",
+    "changeLanguage": "Cambiar idioma"
+}

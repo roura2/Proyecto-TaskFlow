@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation  } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -41,7 +41,8 @@ export class UsersPageComponent {
     private usersService: UsersService,
     private fb: FormBuilder,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService
+  ) { }
 
   ngOnInit(): void {
 
@@ -93,8 +94,6 @@ export class UsersPageComponent {
     const address = this.formNewUser.value.address;
     const tel = this.formNewUser.value.tel;
 
-    // console.log(name, description, game, price, type, image);
-
     this.userDB = {
       name,
       lastname,
@@ -102,8 +101,6 @@ export class UsersPageComponent {
       address,
       tel
     }
-
-    console.log(this.user);
 
     if (this.user.name?.trim()) {
       if (this.user.id) {
@@ -114,7 +111,7 @@ export class UsersPageComponent {
 
         this.usersService.updateUser(this.user.id, this.userDB)
           .subscribe(resp => {
-            console.log(resp);
+            // console.log(resp);
           });
 
         this.users[findIndexById(this.users, this.user.id)] = this.user;
@@ -123,12 +120,13 @@ export class UsersPageComponent {
 
         this.usersService.createUser(this.userDB)
           .subscribe((user) => {
-            console.log(user);
+            // console.log(user);
           });
 
-        this.user = { ...this.userDB };
+        this.user = { ...this.user };
         this.users.push(this.user);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
+        this.getAllUsers();
       }
     }
 
@@ -150,7 +148,7 @@ export class UsersPageComponent {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
 
-        this.usersService.deleteUser(user.id!).subscribe(console.log);
+        this.usersService.deleteUser(user.id!).subscribe();
 
         this.users = this.users.filter(val => val.id !== user.id);
         this.user = {};
@@ -171,14 +169,14 @@ export class UsersPageComponent {
 
   deleteSelectedUsers() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected tournaments?',
+      message: 'Are you sure you want to delete the selected users?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
 
         this.selectedUsers.forEach(({ id }) => {
           this.usersService.deleteUser(id!)
-            .subscribe(console.log);
+            .subscribe();
         });
 
         this.users = this.users.filter(user => !this.selectedUsers.includes(user));

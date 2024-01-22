@@ -35,8 +35,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-right: 10px;
 }
 
-.admin-logo {
-  height: 50px;
+.logo-header {
+  position: relative;
+  bottom: 2px;
+}
+
+.title-header {
+  position: relative;
+  top: 2px;
 }
 
 .body {

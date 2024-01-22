@@ -15,10 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./tasks/tasks.module').then( m => m.TasksModule ),
     ...canActivate(() => redirectUnauthorizedTo(['/auth/login']))
   },
-  // {
-  //   path: '404',
-  //   component: ErrorPageComponent
-  // },
+  {
+    path: '404',
+    component: ErrorPageComponent
+  },
   {
     path: '**',
     redirectTo: 'auth'

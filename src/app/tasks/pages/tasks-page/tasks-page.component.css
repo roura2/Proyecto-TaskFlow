@@ -47,3 +47,18 @@
 .column-header {
   border: 1px solid rgb(207, 207, 207);
 }
+
+.fab-add-column {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0 1rem 1rem 0;
+}
+
+.fab-add-user {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0 0 1rem 1rem;
+
+}
