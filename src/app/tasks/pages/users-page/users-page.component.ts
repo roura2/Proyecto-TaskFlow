@@ -95,6 +95,7 @@ export class UsersPageComponent {
     const tel = this.formNewUser.value.tel;
 
     this.userDB = {
+      id: Math.floor(Math.random() * (999999999999 - 1) + 1).toString(),
       name,
       lastname,
       email,
