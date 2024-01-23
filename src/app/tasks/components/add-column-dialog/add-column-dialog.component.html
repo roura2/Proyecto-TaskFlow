@@ -1,0 +1,22 @@
+<div mat-dialog-content>
+  <label class="mb-3">Add column</label>
+
+  <mat-form-field class="w-100">
+    <mat-label>Name</mat-label>
+    <input matInput
+           [(ngModel)]="column.title"
+           >
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Color</mat-label>
+    <input matInput
+           [(ngModel)]="column.color"
+           >
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="confirmAddColumn()" color="primary">Confirm</button>
+    <button mat-button (click)="closeDialog()">Cancel</button>
+  </div>
+</div>

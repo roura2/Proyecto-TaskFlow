@@ -1,11 +1,16 @@
 <mat-toolbar class="shadow">
-  <button mat-icon-button (click)="sidenav.toggle()">
+  <button mat-icon-button (click)="toggleSidenav()">
     <mat-icon>menu</mat-icon>
   </button>
 
   <span class="">TaskFlow</span>
 
   <span class="spacer"></span>
-  <button mat-raised-button color="primary">Nova columna</button>
+
+  <!-- <app-dialog (emitText)="addColumn($event)" question="Add new column">
+    <button mat-raised-button color="primary">
+      New Column
+    </button>
+  </app-dialog> -->
 
 </mat-toolbar>

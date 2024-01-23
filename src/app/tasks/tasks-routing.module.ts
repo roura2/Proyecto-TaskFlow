@@ -1,44 +1,30 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 
-import { TaskHomeComponent } from './pages/task-home/task-home.component';
-import { ListTaskComponent } from './pages/list-task/list-task.component';
-import { AddTaskComponent } from './pages/add-task/add-task.component';
-import { SearchTaskComponent } from './pages/search-task/search-task.component';
-import { TaskComponent } from './pages/task/task.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
+import { UsersPageComponent } from './pages/users-page/users-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TaskHomeComponent,
+    component: HomePageComponent,
     children: [
       {
-        path: 'list-tasks',
-        component: ListTaskComponent
+        path: 'tasks',
+        component: TasksPageComponent
       },
       {
-        path: 'add-task',
-        component: AddTaskComponent
-      },
-      {
-        path: 'edit-task/:id',
-        component: AddTaskComponent
-      },
-      {
-        path: 'search-task',
-        component: SearchTaskComponent
-      },
-      {
-        path: ':id',
-        component: TaskComponent
+        path: 'users',
+        component: UsersPageComponent
       },
       {
         path: '**',
-        redirectTo: 'list-tasks'
+        redirectTo: 'tasks'
       },
     ]
   }
-]
+];
 
 @NgModule({
   imports: [
@@ -48,6 +34,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class TasksRoutingModule {
-
-}
+export class TasksRoutingModule { }
