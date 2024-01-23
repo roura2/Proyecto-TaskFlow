@@ -23,8 +23,10 @@ router.get('/users', async (req, res) => {
 // ? Crear un nou usuari
 router.post('/new-user', async (req, res) => {
   try {
-    const { name, lastname, email, address, tel } = req.body;
-    const newUserRef = await db.collection('users').add({
+    const { id, name, lastname, email, address, tel } = req.body;
+
+    await db.collection('users').doc(id).set({
+      id,
       name,
       lastname,
       email,
@@ -32,11 +34,19 @@ router.post('/new-user', async (req, res) => {
       tel
     });
 
-    const newUserId = newUserRef.id;
+    // const newUserRef = await db.collection('users').add({
+    //   name,
+    //   lastname,
+    //   email,
+    //   address,
+    //   tel
+    // });
 
-    await db.collection('users').doc(newUserId).update({
-      id: newUserId
-    });
+    // const newUserId = newUserRef.id;
+
+    // await db.collection('users').doc(newUserId).update({
+    //   id: newUserId
+    // });
 
     res.send('New user created');
   } catch (error) {

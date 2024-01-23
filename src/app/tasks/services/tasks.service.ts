@@ -63,6 +63,8 @@ export class TasksService {
       id: Date.now(),
     }
 
+    this.http.post<Task>(`${this._baseUrl}/new-task`, task).subscribe();
+
     this.columns = (this.columns || []).map((column: Column) => {
       if (column.id === columnId) {
         // Asegúrate de inicializar column.tasks como un array si es undefined
@@ -81,7 +83,9 @@ export class TasksService {
       ...column,
       id: Date.now(),
     }
-    
+
+    this.http.post<Column>(`${this._baseUrl}/new-column`, column).subscribe();
+
     this.columns = [...this.columns, column];
     this.columns$.next([...this.columns]);
     this.saveToLocalStorage();

@@ -35,14 +35,22 @@
           <div class="flex align-items-center justify-content-between">
               <h5 class="m-0">List of Users</h5>
 
-              <span class="p-input-icon-left">
-                  <i class="pi pi-search"></i>
-                  <input pInputText
-                         type="text"
-                         [(ngModel)]="term"
-                         (input)="searchUser()"
-                         placeholder="Search..." />
-              </span>
+              <div>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText
+                          type="text"
+                          [(ngModel)]="term"
+                          (input)="searchUser()"
+                          placeholder="Search..." />
+                </span>
+
+                <button pButton
+                        icon="pi pi-refresh"
+                        class="rounded ms-2"
+                        (click)="getAllUsers()">
+                </button>
+              </div>
           </div>
       </ng-template>
 
